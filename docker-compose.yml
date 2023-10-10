@@ -3,7 +3,7 @@ services:
   deconz:
     image: deconzcommunity/deconz
     container_name: deconz
-    restart: always
+    restart: unless-stopped
     ports: 
       - 80:80
       - 443:443
@@ -36,6 +36,9 @@ services:
     volumes:
       - ./zigbee2mqtt-data:/app/data
       - /run/udev:/run/udev:ro
+    depends_on:
+      - mqtt
+      - deconz
     ports:
       - 8080:8080
     environment:
