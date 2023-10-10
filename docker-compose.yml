@@ -1,5 +1,25 @@
 version: '3.8'
 services:
+  deconz:
+    image: deconzcommunity/deconz
+    container_name: deconz
+    restart: always
+    ports: 
+      - 80:80
+      - 443:443
+    volumes:
+      - /opt/deconz:/opt/deCONZ
+    devices:
+      - /dev/serial1
+    environment:
+      - DECONZ_WEB_PORT=80
+      - DECONZ_WS_PORT=443
+      - DEBUG_INFO=1
+      - DEBUG_APS=0
+      - DEBUG_ZCL=0
+      - DEBUG_ZDP=0
+      - DEBUG_OTA=0
+      
   mqtt:
     image: eclipse-mosquitto:2.0
     restart: unless-stopped
@@ -21,4 +41,4 @@ services:
     environment:
       - TZ=Europe/Stockholm
     devices:
-      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/serial1:/dev/ttyACM0
