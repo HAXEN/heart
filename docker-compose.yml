@@ -1,25 +1,5 @@
 version: '3.8'
 services:
-  deconz:
-    image: deconzcommunity/deconz
-    container_name: deconz
-    restart: unless-stopped
-    ports: 
-      - 80:80
-      - 443:443
-    volumes:
-      - /opt/deconz:/opt/deCONZ
-    devices:
-      - /dev/serial1
-    environment:
-      - DECONZ_WEB_PORT=80
-      - DECONZ_WS_PORT=443
-      - DEBUG_INFO=1
-      - DEBUG_APS=0
-      - DEBUG_ZCL=0
-      - DEBUG_ZDP=0
-      - DEBUG_OTA=0
-      
   mqtt:
     image: eclipse-mosquitto:2.0
     restart: unless-stopped
@@ -38,10 +18,21 @@ services:
       - /run/udev:/run/udev:ro
     depends_on:
       - mqtt
-      - deconz
     ports:
       - 8080:8080
     environment:
       - TZ=Europe/Stockholm
     devices:
-      - /dev/serial1:/dev/ttyACM0
+      - /dev/ttyAMA0:/dev/ttyACM0
+
+  hearthsensorlistener:
+    container_name: hearth-sensor-listener
+    image: registryhestia.azurecr.io/hearthsensorlistener:9797
+    depends_on:
+      - mqtt
+    volumes:
+      - ./hearthlistener-data:/app/data
+    environment:
+      - mqtt_host=mqtt
+      - box_id=hearth_poc_1
+      
