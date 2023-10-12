@@ -44,8 +44,10 @@ services:
     volumes:
       - ./hearthiotconnect-data:/app/data
     environment:
+      - DeviceId=heart_poc_1
+      - HostName=Unicorn-project-iot.azure-devices.net
+      - SharedAccessKey=mnPLPzeSpXPjAzPLu+PUIkaVtSDF8XftM5IxXzBJGtM=
       - mqtt_host=mqtt
-      - box_id=hearth_poc_1
 
 
 
