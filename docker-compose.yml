@@ -27,7 +27,7 @@ services:
 
   hearthsensorlistener:
     container_name: hearth-sensor-listener
-    image: registryhestia.azurecr.io/hearthsensorlistener:9837
+    image: registryhestia.azurecr.io/hearthsensorlistener:9855
     depends_on:
       - mqtt
     volumes:
