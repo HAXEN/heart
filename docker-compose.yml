@@ -38,7 +38,7 @@ services:
 
   hearthiotconnect:
     container_name: hearth-iot-connect
-    image: registryhestia.azurecr.io/hearthiotconnect:9857
+    image: registryhestia.azurecr.io/hearthiotconnect:9858
     depends_on:
       - mqtt
     volumes:
