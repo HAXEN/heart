@@ -27,7 +27,7 @@ services:
 
   hearthsensorlistener:
     container_name: hearth-sensor-listener
-    image: registryhestia.azurecr.io/hearthsensorlistener:9856
+    image: registryhestia.azurecr.io/hearthsensorlistener:latest
     depends_on:
       - mqtt
     volumes:
@@ -38,7 +38,7 @@ services:
 
   hearthiotconnect:
     container_name: hearth-iot-connect
-    image: registryhestia.azurecr.io/hearthiotconnect:9858
+    image: registryhestia.azurecr.io/hearthiotconnect:latest
     depends_on:
       - mqtt
     volumes:
